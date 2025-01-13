@@ -28,7 +28,7 @@ object incload_fraud {
     // Define JDBC connection parameters
     val jdbcUrl = "jdbc:postgresql://18.132.73.146:5432/testdb"
     val dbProperties = new java.util.Properties()
-    val dbTable = "sop_fraud_scala-b"
+    val dbTable = "sop_fraud_scala_b"
     dbProperties.setProperty("user", "consultants")  // Your database username
     dbProperties.setProperty("password", "WelcomeItc@2022")  // Your database password
     dbProperties.setProperty("driver", "org.postgresql.Driver")
