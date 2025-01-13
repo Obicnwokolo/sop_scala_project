@@ -4,7 +4,7 @@ import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
-object finance {
+object incload_fraud {
   def main(args: Array[String]): Unit = {
     // Create Spark session
     val spark = SparkSession.builder()
@@ -13,7 +13,7 @@ object finance {
       .getOrCreate()
 
     // Define the file path
-    val csvFilePath = "C:\\Users\\chigb\\Downloads\\fraud_Test.csv"
+    val csvFilePath = "C:\\Users\\chigb\\Downloads\\fraud_project\\fraud_Test2.csv"
 
     // Read CSV file into a DataFrame
     val df = spark.read
@@ -28,7 +28,7 @@ object finance {
     // Define JDBC connection parameters
     val jdbcUrl = "jdbc:postgresql://18.132.73.146:5432/testdb"
     val dbProperties = new java.util.Properties()
-    val dbTable = "sop_fraud_scala"
+    val dbTable = "sop_fraud_scala-b"
     dbProperties.setProperty("user", "consultants")  // Your database username
     dbProperties.setProperty("password", "WelcomeItc@2022")  // Your database password
     dbProperties.setProperty("driver", "org.postgresql.Driver")
@@ -55,9 +55,9 @@ object finance {
     //filteredDf.write.mode("append").csv("C:\\Users\\chigb\\Downloads\\outputs")
 
     // Write DataFrame to PostgreSQL
-//    filteredDf.write //
-//      .mode("append") // Options: overwrite, append, ignore, error
-//      .jdbc(jdbcUrl, dbTable, dbProperties)
+    filteredDf.write //
+      .mode("append") // Options: overwrite, append, ignore, error
+      .jdbc(jdbcUrl, dbTable, dbProperties)
 
     println(s"$totalRows2 new records added successfully")
 

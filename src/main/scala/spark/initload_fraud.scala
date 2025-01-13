@@ -1,4 +1,10 @@
-object initload_finance {
+package spark
+
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.{DataFrame, SparkSession}
+
+object initload_fraud {
   def main(args: Array[String]): Unit = {
     // Create Spark session
     val spark = SparkSession.builder()
@@ -7,7 +13,7 @@ object initload_finance {
       .getOrCreate()
 
     // Define the file path
-    val csvFilePath = "C:\\Users\\chigb\\Downloads\\fraud_Test.csv"
+    val csvFilePath = "C:\\Users\\chigb\\Downloads\\fraud_project\\fraud_Test1.csv"
 
     // Read CSV file into a DataFrame
     val df = spark.read
@@ -22,7 +28,7 @@ object initload_finance {
     // Define JDBC connection parameters
     val jdbcUrl = "jdbc:postgresql://18.132.73.146:5432/testdb"
     val dbProperties = new java.util.Properties()
-    val dbTable = "sop_fraud_scala"
+    val dbTable = "sop_fraud_scala_b"
     dbProperties.setProperty("user", "consultants")  // Your database username
     dbProperties.setProperty("password", "WelcomeItc@2022")  // Your database password
     dbProperties.setProperty("driver", "org.postgresql.Driver")
@@ -31,7 +37,7 @@ object initload_finance {
 
     // Write DataFrame to PostgreSQL
     df.write //
-      .mode("append") // Options: overwrite, append, ignore, error
+      .mode("overwrite") // Options: overwrite, append, ignore, error
       .jdbc(jdbcUrl, dbTable, dbProperties)
 
 
